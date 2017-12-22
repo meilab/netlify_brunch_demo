@@ -20709,6 +20709,16 @@ var _meilab$elm_wexin_crypto$Views$folderListDropdownConfig = {
 	withBorder: false,
 	clickedMsg: _meilab$elm_wexin_crypto$Messages$Toggle(_meilab$elm_wexin_crypto$Types$FolderListOpen)
 };
+var _meilab$elm_wexin_crypto$Views$testView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html$text('hello'),
+			_1: {ctor: '[]'}
+		});
+};
 var _meilab$elm_wexin_crypto$Views$styles = function (_p0) {
 	return _elm_lang$html$Html_Attributes$style(
 		_rtfeldman$elm_css$Css$asPairs(_p0));
@@ -22032,7 +22042,7 @@ var _meilab$elm_wexin_crypto$Views$view = function (model) {
 		var _p10 = model.route;
 		switch (_p10.ctor) {
 			case 'HomeRoute':
-				return _meilab$elm_wexin_crypto$Views$homeView(model);
+				return _meilab$elm_wexin_crypto$Views$testView(model);
 			case 'GeneratorRoute':
 				return _meilab$elm_wexin_crypto$Views$generatorView(model);
 			case 'NavigationRoute':

@@ -49,7 +49,7 @@ view model =
         contentView =
             case model.route of
                 HomeRoute ->
-                    homeView model
+                    testView model
 
                 GeneratorRoute ->
                     generatorView model
@@ -73,6 +73,12 @@ view model =
                     notFoundView
     in
         contentView
+
+
+testView : Model -> Html Msg
+testView model =
+    div []
+        [ text "hello" ]
 
 
 homeView : Model -> Html Msg
