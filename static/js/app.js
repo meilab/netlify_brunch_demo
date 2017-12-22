@@ -1,7 +1,6 @@
 import localforage from 'localforage';
 import R from 'ramda'
 import Clipboard from 'clipboard'
-import Elm from "./elm"
 
 localforage.config({
   name: 'elm-yimi'
@@ -9,7 +8,6 @@ localforage.config({
 
 const service_key = "services"
 
-const app = Elm.Main.fullscreen()
 var clipboard = new Clipboard("#copybutton")
 
 const subscribe = (ports) => {
@@ -35,9 +33,7 @@ const subscribe = (ports) => {
         services = value
       }
 
-      app.ports.receiveServices.send(services);
     })
   })
 }
 
-subscribe(app.ports);

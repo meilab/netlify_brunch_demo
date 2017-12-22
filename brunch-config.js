@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     paths: {
-      watched: ["src","static"],
+      watched: ["static"],
       // Where to compile files to
       public: "./public"
     },
@@ -36,7 +36,7 @@ module.exports = {
     },
     modules: {
       autoRequire: {
-        "js/app.js": ["app/js/app"]
+        "js/app.js": ["static/js/app"]
       }
     },
     npm: {
