@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     paths: {
-      watched: ["static"],
+      watched: ["src","static"],
       // Where to compile files to
       public: "./public"
     },
