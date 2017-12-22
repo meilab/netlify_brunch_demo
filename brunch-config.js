@@ -34,22 +34,8 @@ module.exports = {
         makeParameters : ['--debug','--warn']
       }
     },
-    modules: {
-      autoRequire: {
-        "js/app.js": ["app/js/app"]
-      }
-    },
     npm: {
       enabled: true
-    },
-    overrides: {
-      production: {
-        plugins: {
-          elmBrunch: {
-            makeParameters: []
-          }
-        }
-      }
     }
   }
 };
