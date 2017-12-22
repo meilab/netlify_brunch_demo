@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     paths: {
-      watched: ["app"],
+      watched: ["static"],
       // Where to compile files to
       public: "./public"
     },
@@ -20,7 +20,7 @@ module.exports = {
       // This option sets where we should place non-css and non-js assets in.
       // By default, we set this to "/static/assets". Files in this directory
       // will be copied to `paths.public`, which is "priv/static" by default.
-      assets: /^(app\/assets)/
+      assets: /^(static\/assets)/
     },
     plugins: {
       babel: {
