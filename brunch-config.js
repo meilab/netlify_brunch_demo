@@ -22,12 +22,6 @@ module.exports = {
       // will be copied to `paths.public`, which is "priv/static" by default.
       assets: /^(static\/assets)/
     },
-    plugins: {
-      babel: {
-        // Do not use ES6 compiler in vendor code and elm code
-        ignore: [/static\/vendor/, /elm.js$/]
-      }
-    },
     modules: {
       autoRequire: {
         "js/app.js": ["static/js/app"]
