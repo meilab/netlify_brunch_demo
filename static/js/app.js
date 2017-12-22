@@ -1,3 +1,8 @@
+
+document.addEventListener('DOMContentLoaded', function() {
+  // do your setup here
+  console.log('Initialized app');
+});
 /*
 import localforage from 'localforage';
 import R from 'ramda'
