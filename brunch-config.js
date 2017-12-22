@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     paths: {
-      watched: ["src", "static"],
+      watched: ["static"],
       // Where to compile files to
       public: "./public"
     },
@@ -26,12 +26,6 @@ module.exports = {
       babel: {
         // Do not use ES6 compiler in vendor code and elm code
         ignore: [/static\/vendor/, /elm.js$/]
-      },
-      elmBrunch: {
-        mainModules: ["src/Main.elm"],
-        outputFolder: "static/js/",
-        outputFile: "elm.js",
-        makeParameters : ['--debug','--warn']
       }
     },
     modules: {
@@ -41,15 +35,6 @@ module.exports = {
     },
     npm: {
       enabled: true
-    },
-    overrides: {
-      production: {
-        plugins: {
-          elmBrunch: {
-            makeParameters: []
-          }
-        }
-      }
     }
   }
 };
