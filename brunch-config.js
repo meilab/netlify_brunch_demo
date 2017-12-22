@@ -1,7 +1,7 @@
 module.exports = {
   config: {
     paths: {
-      watched: ["static"],
+      watched: ["app"],
       // Where to compile files to
       public: "./public"
     },
@@ -12,7 +12,7 @@ module.exports = {
       stylesheets: {
         joinTo: "css/app.css",
         order: {
-          after: ["static/css/app.css"] // concat app.css last
+          after: ["app/css/app.css"] // concat app.css last
         }
       }
     },
@@ -20,12 +20,12 @@ module.exports = {
       // This option sets where we should place non-css and non-js assets in.
       // By default, we set this to "/static/assets". Files in this directory
       // will be copied to `paths.public`, which is "priv/static" by default.
-      assets: /^(static\/assets)/
+      assets: /^(app\/assets)/
     },
     plugins: {
       babel: {
         // Do not use ES6 compiler in vendor code and elm code
-        ignore: [/static\/vendor/, /elm.js$/]
+        ignore: [/app\/vendor/, /elm.js$/]
       },
       elmBrunch: {
         mainModules: ["src/Main.elm"],
@@ -36,7 +36,7 @@ module.exports = {
     },
     modules: {
       autoRequire: {
-        "js/app.js": ["static/js/app"]
+        "js/app.js": ["app/js/app"]
       }
     },
     npm: {
