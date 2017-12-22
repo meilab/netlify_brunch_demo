@@ -26,12 +26,6 @@ module.exports = {
       babel: {
         // Do not use ES6 compiler in vendor code and elm code
         ignore: [/app\/vendor/, /elm.js$/]
-      },
-      elmBrunch: {
-        mainModules: ["src/Main.elm"],
-        outputFolder: "static/js/",
-        outputFile: "elm.js",
-        makeParameters : ['--debug','--warn']
       }
     },
     npm: {
