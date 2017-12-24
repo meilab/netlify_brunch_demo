@@ -16,6 +16,8 @@
     "Recipes"
   ],
   "author": "meilab",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "elm": "^0.18.0"
+  }
 }
-
