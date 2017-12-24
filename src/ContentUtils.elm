@@ -1,11 +1,12 @@
 module ContentUtils exposing (..)
 
-import Types exposing (Content, ServiceRecord, DisplayMode(..), FolderType(..))
-import Time.DateTime as DateTime exposing (fromTimestamp, compare)
-import Routing exposing (Route)
-import Posts
+import Types exposing (Content, ContentType(..), TagType)
+import List
 import Pages
+import Posts
+import Date.Extra
 import String
+import Routing exposing (Route)
 
 
 allContent : List Content
@@ -13,52 +14,24 @@ allContent =
     Pages.pages ++ Posts.posts
 
 
-filterByRoute : Route -> List Content -> Maybe Content
-filterByRoute route contentList =
+findByRoute : List Content -> Route -> Maybe Content
+findByRoute contentList route =
     contentList
         |> List.filter (\item -> item.route == route)
         |> List.head
 
 
-filterByDisplayMode : DisplayMode -> List ServiceRecord -> List ServiceRecord
-filterByDisplayMode displayMode serviceList =
-    case displayMode of
-        FolderSelector folderType ->
-            filterByFolder folderType serviceList
-
-        Stared ->
-            filterByStarStatus serviceList
+findBySlug : List Content -> String -> Maybe Content
+findBySlug contentList slug =
+    contentList
+        |> List.filter (\item -> item.slug == slug)
+        |> List.head
 
 
-filterByFolder : FolderType -> List ServiceRecord -> List ServiceRecord
-filterByFolder folderType serviceList =
-    case folderType of
-        AllFolders ->
-            serviceList
-
-        NamedFolder folderName ->
-            serviceList
-                |> List.filter (\item -> item.folderType == folderName)
-
-
-filterByStarStatus : List ServiceRecord -> List ServiceRecord
-filterByStarStatus serviceList =
-    serviceList
-        |> List.filter (\item -> item.stared == True)
-
-
-filterByService : Maybe String -> List ServiceRecord -> List ServiceRecord
-filterByService service serviceList =
-    case service of
-        Just value ->
-            serviceList
-                |> List.filter
-                    (\item ->
-                        String.contains (String.toLower value) (String.toLower item.service)
-                    )
-
-        Nothing ->
-            sortByDate serviceList
+filterByContentType : List Content -> ContentType -> List Content
+filterByContentType contentList contentType =
+    contentList
+        |> List.filter (\item -> item.contentType == contentType)
 
 
 filterByTitle : Maybe String -> List Content -> List Content
@@ -72,22 +45,46 @@ filterByTitle title contentList =
                     )
 
         Nothing ->
+            sortByDate contentList
+
+
+filterByTag : Maybe TagType -> List Content -> List Content
+filterByTag tag contentList =
+    case tag of
+        Just tag ->
             contentList
+                |> List.filter
+                    (\item ->
+                        item.tags
+                            |> List.foldl
+                                (\itemTag containTag ->
+                                    if (containTag == True || itemTag == tag) then
+                                        True
+                                    else
+                                        False
+                                )
+                                False
+                    )
+
+        Nothing ->
+            sortByDate contentList
 
 
-
-{-
-   latest : List ServiceRecord -> ServiceRecord
-   latest =
-       sortByDate >> List.head >> Maybe.withDefault Pages.notFoundContent
--}
+findPosts : List Content -> List Content
+findPosts contentList =
+    filterByContentType contentList Post
 
 
-sortByDate : List ServiceRecord -> List ServiceRecord
+latest : List Content -> Content
+latest =
+    sortByDate >> List.head >> Maybe.withDefault Pages.notFoundContent
+
+
+sortByDate : List Content -> List Content
 sortByDate =
     List.sortWith (flip contentByDateComparison)
 
 
-contentByDateComparison : ServiceRecord -> ServiceRecord -> Order
+contentByDateComparison : Content -> Content -> Order
 contentByDateComparison a b =
-    DateTime.compare (fromTimestamp a.time) (fromTimestamp b.time)
+    Date.Extra.compare a.publishedDate b.publishedDate

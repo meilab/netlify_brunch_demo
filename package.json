@@ -1,26 +1,21 @@
 {
-  "name": "brunch-app",
-  "description": "Brunch.io application",
-  "private": true,
-  "author": "Brunch",
-  "version": "0.0.1",
-  "repository": "",
+  "name": "Elm_Recipes",
+  "version": "1.0.0",
+  "description": "A collection of Elm programming language solutions to common problems",
+  "main": "main.js",
   "scripts": {
-    "start": "brunch watch --server",
-    "build": "brunch build --production"
+    "compile": "elm-make src/Main.elm --output elm.js",
+    "watch": "elm-live src/Main.elm --output elm.js --pushstate --debug"
   },
-  "dependencies": {
-    "clipboard": "^1.7.1",
-    "localforage": "^1.5.5",
-    "ramda": "^0.25.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/meilab/Elm_Recipes"
   },
-  "devDependencies": {
-    "auto-reload-brunch": "^2.7.1",
-    "brunch": "^2.8.2",
-    "hmr-brunch": "^0.1.1",
-    "clean-css-brunch": "~2.0.0",
-    "css-brunch": "~2.0.0",
-    "javascript-brunch": "~2.0.0",
-    "uglify-js-brunch": "~2.0.1"
-  }
+  "keywords": [
+    "Elm",
+    "Recipes"
+  ],
+  "author": "meilab",
+  "license": "MIT"
 }
+

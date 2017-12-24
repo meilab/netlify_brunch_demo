@@ -5,94 +5,58 @@ import Html.CssHelpers exposing (withNamespace)
 
 type CssClass
     = Layout
-    | IntroLayout
     | Container
-    | NewPwContainer
+    | PostPreview
+    | PostPreviewMeta
+    | PostPreviewTitle
+    | PostPreviewSubtitle
+    | PostContentPreview
     | ContentContainer
-    | FolderListWrapper
-    | FolderListActive
-    | FolderListInActive
-    | FolderListContainer
-    | FolderItem
-    | FolderDescription
-    | FolderTransferWrapper
-    | FolderTransferActive
-    | FolderTransferInActive
-    | FolderTransferContainer
-    | Searcher
-    | SearchBar
-    | SearchIcon
-    | SearchClear
-    | IconImg
-      -- serviceView
-    | ServiceContainer
-    | ServiceItem
-    | ServiceDescription
-    | ServiceCreatedTime
-      -- NavigationPage
-    | NavigationContentContainer
-    | NavigationMenuContainer
-      -- Sidemenu
+    | Body
+    | HomePageHero
     | SideBarWrapper
     | SideBarMenu
-    | SideBarActive
-    | SideBarInactive
     | MenuContainer
     | MenuContainerVertical
+    | MenuList
+    | MenuListVertical
+    | HeaderMenuList
     | MenuItem
     | MenuLink
     | MenuSelected
     | MenuActive
     | MenuInActive
     | MenuToggler
+    | ImgResponsive
+    | ContentMeta
+    | MarkdownWrapper
+    | MarkdownContent
+    | SubContent
+    | TrainingContainer
+    | TrainingItem
+    | AuthorContainer
+    | AuthorItem
+    | AuthorMeta
+    | Spacing
+    | TagContainer
+    | TagItem
+    | TagItemActive
+    | Searcher
+    | IconImg
       -- Header and Footer
     | Header
     | HeaderNavWrapper
-    | HeaderNavContainer
-    | InfoPageHeaderNav
-    | IntroNavWrapper
     | HeaderNav
     | Footer
-    | FooterNavContainer
     | CopyRight
     | GithubIframe
-      -- Generator
-    | GeneratorContainer
-    | MetaContainer
-    | ServiceItemMetaContainer
-    | MetaItem
-    | GeneratorFormContainer
-    | GeneratorFormItem
-    | CategorySelectorContainer
-    | CategorySelector
-    | Disclaimer
-    | Arrow
-    | DropdownContainer
-    | DropdownInput
-    | DropdownInputWithBorder
-    | DropdownDisabled
-    | DropdownText
-    | DropdownList
-    | DropdownListItem
-    | GroupButton
-    | GroupButtonDisabled
-    | Hero
-    | MarkdownWrapper
-    | MarkdownContent
-    | CursorPoint
-    | Input
-    | Result
-    | FinalPass
-    | ContentMeta
+      -- For Post
     | MorePostsLink
+    | PostHero
+    | BlogPost
     | PostHead
-    | PostPreview
-    | PostPreviewMeta
-    | PostPreviewTitle
-    | PostPreviewSubtitle
-    | PostContentPreview
 
 
 meilabNamespace : Html.CssHelpers.Namespace String class id msg
 meilabNamespace =
-    withNamespace ""
+    withNamespace "meilab"

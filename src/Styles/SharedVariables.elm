@@ -76,8 +76,3 @@ searchBarHeight =
 buttonRadius : Px
 buttonRadius =
     px 4
-
-
-contentBorder : Style
-contentBorder =
-    border3 (px 1) solid (hex "#e4dad1")

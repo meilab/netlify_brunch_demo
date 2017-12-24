@@ -3,30 +3,43 @@ module ViewHelpers exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (src, href)
 import Messages exposing (Msg(..))
-import Routing exposing (Route, routingItem, mobileHeaderRoutingItem, urlFor)
-import Html.Events exposing (onWithOptions, on)
+import Routing exposing (Route, routingItem, urlFor)
+import Html.Events exposing (onClick)
 import Json.Decode as JD
 import Models exposing (Model)
 import Html.CssHelpers exposing (withNamespace)
 import Styles.SharedStyles exposing (..)
-import Time exposing (Time)
-import Time.DateTime as DateTime exposing (addHours, fromTimestamp)
-import Time.Date as Date exposing (Date)
-import Navigation
-import Mouse exposing (Position)
+import Date.Extra
+import Date exposing (Date)
 
 
 { id, class, classList } =
-    withNamespace ""
+    withNamespace "meilab"
 
 
-navigationOnClick : msg -> Attribute msg
-navigationOnClick message =
-    onWithOptions "click"
+navigationOnClick : Msg -> Attribute Msg
+navigationOnClick msg =
+    Html.Events.onWithOptions "click"
         { stopPropagation = False
         , preventDefault = True
         }
-        (JD.succeed message)
+        (JD.succeed msg)
+
+
+headerNav : Model -> Html Msg
+headerNav model =
+    div [ class [ HeaderNavWrapper ] ]
+        [ navigation model (class [ HeaderNav ]) (class [ MenuList ]) ]
+
+
+horizontalNav : Model -> Html Msg
+horizontalNav model =
+    navigation model (class [ MenuContainer ]) (class [ MenuList ])
+
+
+verticalNav : Model -> Html Msg
+verticalNav model =
+    navigation model (class [ SideBarMenu ]) (class [ MenuListVertical ])
 
 
 navigation : Model -> Attribute Msg -> Attribute Msg -> Html Msg
@@ -38,7 +51,7 @@ navigation model navClass menuClass =
 
 
 navItem : Model -> ( String, String, Route, String ) -> Html Msg
-navItem model ( title, iconUrl, route, slug ) =
+navItem model ( title, iconClass, route, slug ) =
     let
         isCurrentLocation =
             model.route == route
@@ -58,19 +71,9 @@ navItem model ( title, iconUrl, route, slug ) =
         linkItem selectedClass
             onClickCmd
             (class [])
-            iconUrl
+            iconClass
             slug
             title
-
-
-navBack : Html Msg
-navBack =
-    linkItem (class [])
-        Backward
-        (class [])
-        "fa fa-angle-left"
-        ""
-        "返回"
 
 
 linkItem : Attribute Msg -> Msg -> Attribute Msg -> String -> String -> String -> Html Msg
@@ -84,9 +87,8 @@ linkItem liClass onClickCmd aClass iconClass slug textToShow =
             , navigationOnClick (onClickCmd)
             , aClass
             ]
-            [ --img [ src iconUrl ] []
-              i [ Html.Attributes.class iconClass ] []
-            , span [] [ text (" " ++ textToShow) ]
+            [ i [ Html.Attributes.class iconClass ] []
+            , text textToShow
             ]
         ]
 
@@ -123,37 +125,6 @@ footerLinkItem ( _, iconClass, slug ) =
         ]
 
 
-onMouseDown : String -> Attribute Msg
-onMouseDown serviceName =
-    on "mousedown" (JD.map (DragStart serviceName) Mouse.position)
-
-
-formatTime : Time.Time -> String
-formatTime time =
-    time
-        |> fromTimestamp
-        |> addHours 8
-        |> DateTime.toISO8601
-
-
 formatDate : Date -> String
-formatDate date =
-    date
-        |> Date.toISO8601
-
-
-displayTime : Time.Time -> String
-displayTime time =
-    let
-        date =
-            time
-                |> fromTimestamp
-                |> addHours 8
-    in
-        (DateTime.month date |> toString)
-            ++ "月"
-            ++ (DateTime.day date |> toString |> String.padLeft 2 '0')
-            ++ "日 "
-            ++ (DateTime.hour date |> toString |> String.padLeft 2 '0')
-            ++ ":"
-            ++ (DateTime.minute date |> toString |> String.padLeft 2 '0')
+formatDate =
+    Date.Extra.toFormattedString "MMMM ddd, y"

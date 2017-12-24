@@ -1,23 +1,12 @@
 module Styles.Colors exposing (..)
 
 import Css exposing (..)
-import Css.Colors exposing (..)
 
 
 background : Color
 background =
     --hex "#1D1D1D"
     white
-
-
-bordercolor : Color
-bordercolor =
-    hex "#564944"
-
-
-contentBordercolor : Color
-contentBordercolor =
-    hex "#e4dad1"
 
 
 ribbonBackground : Color
@@ -103,3 +92,13 @@ fire =
 drawer : Color
 drawer =
     rgba 30 30 29 0.95
+
+
+white : Color
+white =
+    hex "#FFFFFF"
+
+
+snow : Color
+snow =
+    white

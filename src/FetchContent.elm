@@ -1,6 +1,6 @@
 module FetchContent exposing (..)
 
-import Types exposing (Content)
+import Types exposing (Content, ContentType(..))
 import Messages exposing (Msg(..))
 import Http
 import RemoteData
@@ -16,4 +16,21 @@ fetch content base_url =
 
 locForContent : Content -> String -> String
 locForContent content base_url =
-    base_url ++ "/content/" ++ content.name ++ ".md"
+    let
+        loc =
+            locationForContentType content.contentType
+    in
+        base_url ++ "/content/" ++ loc ++ content.name ++ ".md"
+
+
+locationForContentType : ContentType -> String
+locationForContentType contentType =
+    case contentType of
+        Page ->
+            "pages/"
+
+        AuthorPage ->
+            "pages/"
+
+        Post ->
+            "posts/"

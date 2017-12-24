@@ -1,25 +1,8 @@
 module Models exposing (..)
 
-import Types
-    exposing
-        ( ServiceRecord
-        , Content
-        , Config
-        , PasswordCategory(..)
-        , FolderType(..)
-        , DisplayMode(..)
-        , OpenDropdown(..)
-        , Drag
-        , ServiceItemOffset
-        )
 import Routing exposing (Route)
-import Password.Models exposing (PasswordGenerator, initGenerator)
-import Time exposing (Time)
-
-
-dragOffsetThresh : Int
-dragOffsetThresh =
-    60
+import Types exposing (Content, Tags, TagType(..))
+import Pages
 
 
 type alias Url =
@@ -27,54 +10,46 @@ type alias Url =
 
 
 type alias Ui =
-    { folderListActive : Bool }
+    { sideMenuActive : Bool }
 
 
 type alias Model =
     { route : Route
     , url : Url
-    , ui : Ui
+    , tags : Tags
     , currentContent : Content
-    , generator : PasswordGenerator
-    , selectedFolder : FolderType
-    , stared : Bool
-    , currentTime : Time
-    , defaultConfig : Config
-    , savedServices : List ServiceRecord
-    , folders : List String
-    , displayMode : DisplayMode
-    , serviceFilter : Maybe String
-    , openDropDown : OpenDropdown
-    , dropdownFolderList : Maybe String
-    , drag : Maybe Drag
-    , serviceItemOffset : Maybe ServiceItemOffset
     , titleFilter : Maybe String
+    , tagFilter : Maybe TagType
     }
 
 
-initDefaultConfig : Config
-initDefaultConfig =
-    Config (Just 8) All
+tags : Tags
+tags =
+    [ FlowControl
+    , Collections
+    , Strings
+    , Functions
+    , Types
+    , Union
+    , DataStructure
+    , Destructuring
+    , Repl
+    , Debugging
+    , Files
+    , Native
+    , NativeUi
+    , Plotting
+    , Json
+    , Phoenix
+    ]
 
 
-initModel : Route -> Content -> Url -> Model
-initModel route content url =
+initialModel : Route -> Url -> Model
+initialModel route url =
     { route = route
     , url = url
-    , ui = Ui False
-    , currentContent = content
-    , generator = initGenerator
-    , selectedFolder = AllFolders
-    , stared = False
-    , currentTime = 0.0
-    , defaultConfig = initDefaultConfig
-    , savedServices = []
-    , folders = [ "Life", "Work" ]
-    , displayMode = FolderSelector AllFolders
-    , serviceFilter = Nothing
-    , openDropDown = AllClosed
-    , dropdownFolderList = Nothing
-    , drag = Nothing
-    , serviceItemOffset = Nothing
+    , tags = tags
+    , currentContent = Pages.home
     , titleFilter = Nothing
+    , tagFilter = Nothing
     }

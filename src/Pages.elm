@@ -1,23 +1,26 @@
 module Pages exposing (..)
 
-import Types exposing (Content)
+import Authors
+import Date.Extra exposing (fromCalendarDate)
+import Date exposing (Month(..))
+import Types exposing (Content, ContentType(..))
 import RemoteData exposing (RemoteData)
 import Routing exposing (Route(..))
-import Time.Date as Date exposing (Date, date)
-import Authors
 
 
 home : Content
 home =
     { slug = "/"
     , route = HomeRoute
+    , contentType = Page
     , name = "index"
-    , title = "About Me: WY"
-    , publishedDate = date 2017 12 3
+    , title = "Elm Recipes"
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
-    , preview = "Home Page"
+    , preview = ""
     , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
@@ -25,108 +28,88 @@ about : Content
 about =
     { slug = "/about"
     , route = AboutRoute
+    , contentType = Page
     , name = "about"
-    , title = "About this tool"
-    , publishedDate = date 2017 12 3
-    , author = Authors.wy
-    , markdown = RemoteData.NotAsked
-    , preview = "About Page"
-    , hero = "images/cover1.jpg"
-    }
-
-
-implementation : Content
-implementation =
-    { slug = "/implementation"
-    , route = ImplementationRoute
-    , name = "implementation"
-    , title = "Implementation Details"
-    , publishedDate = date 2017 12 3
-    , author = Authors.wy
-    , markdown = RemoteData.NotAsked
-    , preview = ""
-    , hero = "images/cover7.jpg"
-    }
-
-
-generator : Content
-generator =
-    { slug = "/generator"
-    , route = GeneratorRoute
-    , name = "generator"
-    , title = "Generator"
-    , publishedDate = date 2017 12 3
+    , title = "About Elm Recipes"
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
     , preview = ""
     , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
-navigation : Content
-navigation =
-    { slug = "/navigation"
-    , route = NavigationRoute
-    , name = "navigation"
-    , title = "Navigation"
-    , publishedDate = date 2017 12 3
+archives : Content
+archives =
+    { slug = "archive"
+    , route = ArchiveRoute
+    , contentType = Page
+    , name = "archive"
+    , title = "Archive"
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
     , preview = ""
     , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
-author : Content
-author =
-    { slug = "/author"
+authors : Content
+authors =
+    { slug = "author"
     , route = AuthorRoute
+    , contentType = AuthorPage
     , name = "author"
-    , title = "About Wang Yi"
-    , publishedDate = date 2017 12 3
+    , title = "Author"
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
     , preview = ""
-    , hero = "images/cover4.jpg"
+    , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
 notFoundContent : Content
 notFoundContent =
-    { slug = "/notfound"
+    { slug = "notfound"
     , route = NotFoundRoute
+    , contentType = Page
     , name = "not-found"
     , title = "Couldn't find content"
-    , publishedDate = date 2017 12 3
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
     , preview = ""
     , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
 notFound404 : Content
 notFound404 =
-    { slug = "/404"
+    { slug = "404"
     , route = NotFoundRoute
+    , contentType = Page
     , name = "404"
     , title = "You Are lost"
-    , publishedDate = date 2017 12 3
+    , publishedDate = fromCalendarDate 2017 Sep 23
     , author = Authors.wy
     , markdown = RemoteData.NotAsked
     , preview = ""
     , hero = "images/cover1.jpg"
+    , tags = []
     }
 
 
 pages : List Content
 pages =
     [ home
-    , generator
-    , navigation
     , about
-    , implementation
-    , author
+    , archives
+    , authors
     , notFoundContent
     , notFound404
     ]
